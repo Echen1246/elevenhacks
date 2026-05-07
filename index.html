@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Workday — Where work happens.</title>
+<link rel="stylesheet" href="workday.css">
+<style>
+  body { overflow-x: hidden; }
+
+  /* Marquee */
+  .marquee {
+    overflow: hidden; border-top: 1px solid var(--wd-line); border-bottom: 1px solid var(--wd-line);
+    padding: 18px 0; white-space: nowrap; background: var(--wd-paper);
+  }
+  .marquee-track {
+    display: inline-flex; gap: 64px; animation: scroll 40s linear infinite;
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .marquee-track span { display: inline-flex; align-items: center; gap: 64px; }
+  .marquee-track .dot { width: 6px; height: 6px; background: var(--wd-ink); border-radius: 50%; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; padding-bottom: 32px; align-items: end; }
+  .lede { font-family: var(--font-serif); font-size: 26px; line-height: 1.35; max-width: 38ch; color: var(--wd-ink); }
+  .lede em { font-style: italic; }
+
+  .hero-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wd-mute); }
+
+  /* Section: features */
+  section.features {
+    padding: 96px 48px;
+    border-top: 1px solid var(--wd-line);
+    background: var(--wd-bg);
+  }
+  .feat-h { font-size: clamp(48px, 7vw, 96px); font-weight: 300; letter-spacing: -0.04em; line-height: 0.92; max-width: 14ch; }
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 64px; border-top: 1px solid var(--wd-line); }
+  .feat-cell { padding: 32px 24px 32px 0; border-right: 1px solid var(--wd-line); }
+  .feat-cell:last-child { border-right: none; padding-right: 0; }
+  .feat-cell .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--wd-mute); }
+  .feat-cell h3 { font-size: 28px; font-weight: 400; letter-spacing: -0.02em; margin: 18px 0 10px; }
+  .feat-cell p { font-size: 15px; line-height: 1.5; color: var(--wd-ink-2); margin: 0; max-width: 32ch; }
+
+  /* Voice callout */
+  section.voice-pitch {
+    padding: 120px 48px;
+    background: var(--wd-ink); color: var(--wd-bg);
+    border-top: 1px solid var(--wd-line);
+  }
+  .voice-pitch .eb { color: rgba(250,250,245,0.6); }
+  .voice-pitch h2 { font-size: clamp(56px, 8vw, 120px); font-weight: 300; letter-spacing: -0.04em; line-height: 0.92; max-width: 16ch; margin: 24px 0 36px; }
+  .voice-pitch h2 em { font-style: italic; font-family: var(--font-serif); font-weight: 400; }
+  .voice-pitch .quotes {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 64px;
+    border-top: 1px solid rgba(250,250,245,0.2);
+  }
+  .voice-pitch .quote-cell { padding: 28px 24px 28px 0; border-right: 1px solid rgba(250,250,245,0.2); }
+  .voice-pitch .quote-cell:last-child { border-right: none; }
+  .voice-pitch .quote-cell q { font-family: var(--font-serif); font-size: 22px; font-style: italic; line-height: 1.3; display: block; }
+  .voice-pitch .quote-cell .by { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; margin-top: 16px; }
+
+  /* Footer */
+  footer { padding: 64px 48px 40px; border-top: 1px solid var(--wd-line); background: var(--wd-bg); }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
+  .foot-grid h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wd-mute); margin: 0 0 16px; font-weight: 500; }
+  .foot-grid ul { list-style: none; padding: 0; margin: 0; }
+  .foot-grid li { padding: 4px 0; font-size: 14px; }
+  .foot-grid li a { color: var(--wd-ink-2); }
+  .foot-grid li a:hover { color: var(--wd-ink); text-decoration: underline; }
+  .foot-bottom { display: flex; justify-content: space-between; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--wd-line-soft); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--wd-mute); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 80px; border-top: 1px solid var(--wd-line);
+  }
+  .hero-stats .cell { padding: 28px 0 0; border-right: 1px solid var(--wd-line); padding-right: 16px; }
+  .hero-stats .cell:last-child { border-right: none; }
+  .hero-stats .n { font-size: 56px; font-weight: 300; letter-spacing: -0.04em; line-height: 1; }
+  .hero-stats .l { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wd-mute); margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div class="mk-hero">
+  <nav class="mk-nav">
+    <div class="row gap-lg">
+      <div style="font-weight: 600; font-size: 22px; letter-spacing: -0.04em;">Workday<span style="color: var(--wd-accent);">.</span></div>
+      <div class="row gap" style="margin-left: 24px;">
+        <a href="#features">Platform</a>
+        <a href="#features">Solutions</a>
+        <a href="#voice">AI</a>
+        <a href="#features">Customers</a>
+        <a href="#features">Resources</a>
+      </div>
+    </div>
+    <div class="row gap-sm">
+      <a href="login.html" class="btn sm" style="border-color: transparent;">Sign in</a>
+      <a href="login.html" class="btn primary sm">Get started →</a>
+    </div>
+  </nav>
+
+  <div>
+    <div class="row between" style="margin-top: 56px;">
+      <div class="hero-meta">№ 001 — Spring 2026 · Where work happens.</div>
+      <div class="hero-meta">v0.1 · with ElevenLabs voice</div>
+    </div>
+
+    <h1 class="mk-headline">
+      Run people<br/>
+      <em class="serif-it">like</em> people.<br/>
+      Not <em class="serif-it">tickets.</em>
+    </h1>
+
+    <div class="hero-grid">
+      <div>
+        <p class="lede" style="margin-top: 56px;">
+          Workday is the HR system for organizations that don't think HR is a system. Pay, leave, hiring, growth — answered in plain English by an assistant trained on <em>your</em> handbook, your benefits, your team.
+        </p>
+        <div class="row gap" style="margin-top: 40px;">
+          <a href="login.html" class="btn primary">Sign in to Workday →</a>
+          <a href="#voice" class="btn">Hear it talk</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="cell"><div class="n">10k+</div><div class="l">Companies</div></div>
+        <div class="cell"><div class="n">65M</div><div class="l">Workers</div></div>
+        <div class="cell"><div class="n">24/7</div><div class="l">Voice answers</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>People · Pay · Time off · Benefits · Expenses · Growth · Learning · Talent · Goals · Org · People · Pay · Time off · Benefits</span>
+    <span>People · Pay · Time off · Benefits · Expenses · Growth · Learning · Talent · Goals · Org · People · Pay · Time off · Benefits</span>
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="row between" style="align-items: end;">
+    <div>
+      <div class="eb">№ 002 — The platform</div>
+      <h2 class="feat-h" style="margin-top: 16px;">Every system of record. <em class="serif-it">One</em> place to ask.</h2>
+    </div>
+    <div class="hero-meta">Scroll ↓</div>
+  </div>
+
+  <div class="feat-grid">
+    <div class="feat-cell">
+      <div class="num">01 / Human Capital</div>
+      <h3 class="serif">Pay, time off, benefits.</h3>
+      <p>Self-serve everything an employee asks of HR — without an HR ticket. Direct deposit, W-2, PTO requests, 401(k) elections.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="num">02 / Talent</div>
+      <h3 class="serif">Hire, grow, retain.</h3>
+      <p>Internal mobility, performance reviews, learning plans, career paths. People see their next step before their manager has to mention it.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="num">03 / Finance</div>
+      <h3 class="serif">Expenses & budget.</h3>
+      <p>Receipt capture, instant reimbursement, T&E policy enforced at submission — not at month-end.</p>
+    </div>
+  </div>
+</section>
+
+<section class="voice-pitch" id="voice">
+  <div class="eb">№ 003 — Workday assistant · ElevenLabs voice</div>
+  <h2>Ask, don't <em>click.</em></h2>
+  <p style="font-family: var(--font-serif); font-size: 22px; max-width: 32ch; line-height: 1.4; opacity: 0.85;">
+    The bottom of every page is a microphone. Talk to it like a coworker who's read every policy doc and knows your last paycheck by heart.
+  </p>
+
+  <div class="quotes">
+    <div class="quote-cell">
+      <q>How many vacation days do I have left?</q>
+      <div class="by">Sarah · Design</div>
+    </div>
+    <div class="quote-cell">
+      <q>Submit a personal day for next Friday.</q>
+      <div class="by">Marcus · Engineering</div>
+    </div>
+    <div class="quote-cell">
+      <q>What's my 401(k) match?</q>
+      <div class="by">Priya · Marketing</div>
+    </div>
+    <div class="quote-cell">
+      <q>How many job applications have I submitted?</q>
+      <div class="by">Sarah · Design</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 64px;">
+    <a href="login.html" class="btn" style="border-color: var(--wd-bg); color: var(--wd-bg);">Sign in to try it →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div style="font-weight: 600; font-size: 22px; letter-spacing: -0.04em;">Workday<span style="color: var(--wd-accent);">.</span></div>
+      <p style="font-family: var(--font-serif); font-size: 18px; line-height: 1.4; max-width: 32ch; margin-top: 16px; color: var(--wd-ink-2);">
+        Built at ElevenHacks 2026. With <em>v0</em> + ElevenLabs.
+      </p>
+    </div>
+    <div>
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="#">HCM</a></li>
+        <li><a href="#">Payroll</a></li>
+        <li><a href="#">Talent</a></li>
+        <li><a href="#">Finance</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Customers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Account</h4>
+      <ul>
+        <li><a href="login.html">Sign in</a></li>
+        <li><a href="login.html">Get started</a></li>
+        <li><a href="#">Status</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2026 Workday Inc.</div>
+    <div>Made with v0 + ElevenLabs · Voice powered by ElevenLabs ConvAI</div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="voice.js"></script>
+</body>
+</html>

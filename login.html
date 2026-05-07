@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sign in — Workday</title>
+<link rel="stylesheet" href="workday.css">
+<style>
+  body { min-height: 100vh; }
+  .login-grid { display: grid; grid-template-columns: 1.1fr 1fr; min-height: 100vh; }
+  .login-art {
+    background: var(--wd-ink); color: var(--wd-bg);
+    padding: 32px 48px; display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .login-art .brand { font-weight: 600; font-size: 22px; letter-spacing: -0.04em; }
+  .login-art .brand span { color: var(--wd-accent); }
+  .login-art h1 {
+    font-size: clamp(64px, 8vw, 132px); font-weight: 300; letter-spacing: -0.06em; line-height: 0.86; margin: 0;
+  }
+  .login-art h1 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+  .login-art .meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; }
+
+  .login-form { padding: 32px 64px; display: flex; flex-direction: column; justify-content: space-between; }
+  .login-form-inner { max-width: 400px; margin: auto 0; width: 100%; }
+  .form-h { font-size: 48px; font-weight: 300; letter-spacing: -0.04em; margin: 0 0 8px; }
+  .form-h em { font-style: italic; font-family: var(--font-serif); }
+  .form-sub { color: var(--wd-mute); font-size: 15px; line-height: 1.5; margin: 0 0 32px; }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--wd-mute); margin-bottom: 8px; }
+
+  .demo-creds {
+    margin-top: 24px; padding: 16px; border: 1px dashed var(--wd-line-soft);
+    font-size: 13px; line-height: 1.6; color: var(--wd-ink-2);
+  }
+  .demo-creds .eb { margin-bottom: 6px; display: block; }
+  .demo-creds code { font-family: var(--font-mono); background: var(--wd-bg); padding: 1px 6px; }
+
+  .login-foot { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--wd-mute); padding-top: 24px; }
+</style>
+</head>
+<body>
+
+<div class="login-grid">
+  <div class="login-art">
+    <div class="row between">
+      <a href="index.html" class="brand">Workday<span>.</span></a>
+      <div class="meta">№ 004 — Sign in</div>
+    </div>
+    <div>
+      <div class="meta" style="margin-bottom: 24px;">Welcome back.</div>
+      <h1>The day<br/><em>begins</em><br/>here.</h1>
+      <p style="font-family: var(--font-serif); font-size: 22px; font-style: italic; max-width: 28ch; line-height: 1.4; opacity: 0.85; margin-top: 32px;">
+        Pay, leave, growth — answered by voice.
+      </p>
+    </div>
+    <div class="meta">© 2026 Workday Inc. · ElevenHacks edition</div>
+  </div>
+
+  <div class="login-form">
+    <div class="row between">
+      <div class="meta" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wd-mute);">Employee Sign in</div>
+      <a href="index.html" class="meta" style="text-decoration: none; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wd-mute);">← Back</a>
+    </div>
+
+    <form class="login-form-inner" id="login-form" autocomplete="off">
+      <h2 class="form-h">Welcome <em>back.</em></h2>
+      <p class="form-sub">Sign in with your Acme work email. Single sign-on enabled.</p>
+
+      <div class="field">
+        <label>Work email</label>
+        <input class="input" type="email" name="email" id="email" placeholder="sarah.kim@acme.com" required value="sarah.kim@acme.com"/>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input class="input" type="password" name="password" id="password" placeholder="••••••••" required value="demo"/>
+      </div>
+
+      <button type="submit" class="btn primary" style="width: 100%; padding: 16px; justify-content: center; margin-top: 8px;">
+        Sign in →
+      </button>
+
+      <div class="demo-creds">
+        <span class="eb">Demo accounts — click to sign in</span>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px;">
+          <button type="button" class="btn sm" data-emp="sarah" style="justify-content: center;">Sarah · Design</button>
+          <button type="button" class="btn sm" data-emp="marcus" style="justify-content: center;">Marcus · Eng</button>
+          <button type="button" class="btn sm" data-emp="priya" style="justify-content: center;">Priya · Mktg</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="login-foot">
+      <span>Need help? Talk to the assistant ↓</span>
+      <span>v0 + ElevenLabs</span>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+  document.getElementById('login-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.toLowerCase();
+    let id = 'sarah';
+    if (email.startsWith('marcus')) id = 'marcus';
+    else if (email.startsWith('priya')) id = 'priya';
+    window.WD.set(id);
+    window.location.href = 'app.html';
+  });
+  document.querySelectorAll('button[data-emp]').forEach(b => {
+    b.addEventListener('click', () => {
+      window.WD.set(b.dataset.emp);
+      window.location.href = 'app.html';
+    });
+  });
+</script>
+<script src="voice.js"></script>
+</body>
+</html>

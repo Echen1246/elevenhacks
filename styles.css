@@ -1,0 +1,136 @@
+/* Wireframe-specific styles for Workday redesign exploration */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&display=swap');
+
+/* —— Sketchy fonts for low-fi wireframes —— */
+:root {
+  --font-hand: "Kalam", "Caveat", "Comic Sans MS", cursive;
+  --font-hand-tight: "Caveat", cursive;
+}
+
+/* === SHARED WIREFRAME PRIMITIVES === */
+
+/* Sketchy box — wobbly border for hand-drawn feel */
+.wf-sketchy {
+  border: 1.5px solid #1a1a1a;
+  background: #fff;
+  position: relative;
+  border-radius: 2px;
+}
+.wf-sketchy.dashed { border-style: dashed; }
+.wf-sketchy.thick { border-width: 2.5px; }
+
+/* Hand-drawn squiggle SVG bg for "image placeholder" */
+.wf-img-ph {
+  background:
+    linear-gradient(135deg, transparent 49.5%, #1a1a1a 49.5%, #1a1a1a 50.5%, transparent 50.5%),
+    linear-gradient(45deg,  transparent 49.5%, #1a1a1a 49.5%, #1a1a1a 50.5%, transparent 50.5%);
+  background-color: #fafafa;
+  border: 1.5px solid #1a1a1a;
+  position: relative;
+}
+
+/* Squiggly line */
+.wf-line {
+  background-image:
+    repeating-linear-gradient(90deg, #1a1a1a 0 6px, transparent 6px 12px);
+  height: 1.5px;
+}
+
+.wf-bar { background: #1a1a1a; height: 6px; }
+
+/* Lo-fi text placeholder — gray bars */
+.wf-text-line {
+  height: 8px;
+  background: #d4d4d4;
+  border-radius: 1px;
+  margin: 4px 0;
+}
+.wf-text-line.dark { background: #1a1a1a; }
+.wf-text-line.short { width: 40%; }
+.wf-text-line.med { width: 70%; }
+
+/* === MID-FI BRUTALIST === */
+.brut {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  background: #f5f5f0;
+  color: #0a0a0a;
+}
+.brut-card {
+  background: #fff;
+  border: 2px solid #0a0a0a;
+  box-shadow: 6px 6px 0 #0a0a0a;
+}
+.brut-card.flat { box-shadow: none; }
+.brut-card.inv { background: #0a0a0a; color: #fff; }
+.brut-card.accent { background: #ff5722; color: #fff; border-color: #0a0a0a; }
+.brut-card.lime { background: #d9f99d; color: #0a0a0a; }
+
+.brut-h {
+  font-family: "Geist", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+}
+.brut-mono {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Inline waveform for voice listening */
+.wave-bar {
+  display: inline-block;
+  background: currentColor;
+  width: 3px;
+  margin: 0 1px;
+  border-radius: 1px;
+  animation: wave 0.9s ease-in-out infinite;
+}
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+/* Diagonal grain texture */
+.grain {
+  background-image:
+    repeating-linear-gradient(45deg,
+      rgba(0,0,0,0.04) 0 1px, transparent 1px 4px);
+}
+
+/* Dotted grid — paper feel */
+.dotted-paper {
+  background-color: #fafaf7;
+  background-image: radial-gradient(#0a0a0a22 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Annotation arrow / callout style */
+.wf-annot {
+  font-family: var(--font-hand);
+  color: #c2410c;
+  font-size: 14px;
+  line-height: 1.2;
+}
+.wf-annot-line {
+  stroke: #c2410c;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* Scribble underline */
+.scribble {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8'><path d='M0 6 Q 25 0, 50 5 T 100 4' fill='none' stroke='%23ef4444' stroke-width='2'/></svg>");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 6px;
+  padding-bottom: 6px;
+}
+
+/* X cross marker */
+.wf-x::before { content: "✕"; color: #999; }
+
+/* Force no-rounded for brutalist */
+.no-round, .no-round * { border-radius: 0 !important; }
